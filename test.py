@@ -10,8 +10,8 @@ def get_page(url):
     response = requests.get(url)
 
 
-soup = BeautifulSoup(response.text, 'lxml')
-return soup
+    soup = BeautifulSoup(response.text, 'lxml')
+    return soup
 
 
 # get_links函数的作用：获取列表页所有租房链接
@@ -19,9 +19,9 @@ def get_links(link_url):
     soup = get_page(link_url)
 
 
-links_div = soup.find_all('div', class_="pic-panel")
-links = [div.a.get('href') for div in links_div]
-return links
+    links_div = soup.find_all('div', class_="pic-panel")
+    links = [div.a.get('href') for div in links_div]
+    return links
 
 
 # get_house_info函数作用是：获取某一个租房页面的信息：价格、单位、面积等
@@ -29,21 +29,21 @@ def get_house_info(house_url):
     soup = get_page(house_url)
 
 
-price = soup.find('span', class_='total').text
-unit = soup.find('span', class_='unit').text.strip()
-area = 'test'  # 这里area字段我们自定义一个test做测试
-info = {
-    '价格': price,
-    '单位': unit,
-    '面积': area
-}
-return info
+    price = soup.find('span', class_='total').text
+    unit = soup.find('span', class_='unit').text.strip()
+    area = 'test'  # 这里area字段我们自定义一个test做测试
+    info = {
+        '价格': price,
+        '单位': unit,
+        '面积': area
+    }
+    return info
 # 数据库的配置信息写到字典
 DataBase = {
     'host': '127.0.0.1',
     'database': 'exam',
     'user': 'root',
-    'password': 'root',
+    'password': 'Ln2018!!',
     'charset': 'utf8mb4'}
 
 
@@ -57,13 +57,13 @@ def insert(db, house):
     values = "'{}'," * 2 + "'{}'"
 
 
-sql_values = values.format(house['价格'], house['单位'], house['面积'])
-sql = """
+    sql_values = values.format(house['价格'], house['单位'], house['面积'])
+    sql = """
 insert  into house(price,unit,area) values({})
 """.format(sql_values)
-cursor = db.cursor()
-cursor.execute(sql)
-db.commit()
+    cursor = db.cursor()
+    cursor.execute(sql)
+    db.commit()
 # 主程序流程：1.连接数据库 2.得到各个房源信息的URL列表3.FOR循环从第一个URL开始获取房源具体信息（价格等）4.一条一条地插入数据库
 db = get_db(DataBase)
 links = get_links('https://bj.lianjia.com/zufang/')
