@@ -40,7 +40,7 @@ def get_house_info(house_url):
     return info
 # 数据库的配置信息写到字典
 DataBase = {
-    'host': '127.0.0.1',
+    'host': 'localhost',
     'database': 'exam',
     'user': 'root',
     'password': 'Ln2018!!',
