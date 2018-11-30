@@ -1,4 +1,6 @@
 from selenium import webdriver
-browser = webdriver.Firefox()
-browser.get("http://zhihu.com")
-browser.close()
+b = webdriver.Firefox()
+b.get("http://ww.baidu.com")
+c = b.find_element_by_name("wd")
+c.send_keys('java')
+c.submit()
