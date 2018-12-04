@@ -1,10 +1,14 @@
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.action_chains import ActionChains #模拟用户行为
-b = webdriver.Firefox()
-b.get('https://www.waitsun.com')
-b.maximize_window()   #最大化窗口
-ele = b.find_elements_by_link_text('开发')
-ActionChains(b).move_to_element(ele).perform()
-ele2 = b.find_elements_by_link_text('思维导图')
-ele2.click
+driver = webdriver.Firefox()
+driver.get('https://www.waitsun.com')
+driver.maximize_window()   #最大化窗口
+ele = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/ul/li[5]/a')
+ActionChains(driver).move_to_element(ele).perform()
+sleep(5)
+ele2 = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/ul/li[5]/ul/li[1]/a')
+sleep(5)
+ele2.click()
+sleep(10)
+driver.close()
